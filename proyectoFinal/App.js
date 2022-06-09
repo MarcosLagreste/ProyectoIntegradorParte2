@@ -4,9 +4,7 @@ import StackNavigation from './src/navigation/StackNavigation';
 
 export default function App() {
   return (
-    <View styles={style.container}>
       <StackNavigation/>
-    </View>
   );
 }
 
