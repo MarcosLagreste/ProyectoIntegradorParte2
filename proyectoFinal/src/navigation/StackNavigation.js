@@ -3,13 +3,13 @@ import { auth, db } from '../firebase/config';
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Login from "../screens/Login/login";
-import Home from "../screens/Home/home";
-import Register from "../screens/Register/register";
+import Login from "../screens/Login/Login";
+import Home from "../screens/Home/Home";
+import Register from "../screens/Register/Register";
 import { StatusBar } from 'expo-status-bar';
 import TabNavigation from './TabNavigation';
-import Comments from '../screens/Comments/comments'
-import Posts from '../screens/Posts/posts';
+import Comments from '../screens/Comments/Comments'
+import Posts from '../screens/Posts/Posts';
 
 const Stack = createNativeStackNavigator()
 
@@ -70,12 +70,12 @@ class StackNavigation extends Component{
                             options={{
                                 headerShown:false
                             }}
-                        //     initialParams={
-                        //         {
-                        //             logout: () => this.logout(),
-                        //             errorMessage: this.message
-                        //         }
-                        //     }
+                            initialParams={
+                                {
+                                    logout: (Out) => this.logout(Out),
+                                    errorMessage: this.message
+                                }
+                            }
                              />
                         {/* //     <Stack.Screen
                         //         name='Post'

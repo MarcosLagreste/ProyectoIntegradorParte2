@@ -15,6 +15,7 @@ class Home extends Component {
     return (
       <View style={styles.container}>
        <Text>Estos son los posts recientes:</Text>
+       
       </View>
     )
   }

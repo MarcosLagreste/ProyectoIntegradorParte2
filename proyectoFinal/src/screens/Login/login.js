@@ -32,7 +32,6 @@ class Login extends Component {
             Loguearme
           </Text>
         </TouchableOpacity>
-
         <Text>
           No tienes una cuenta?
         </Text>
