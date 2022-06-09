@@ -15,12 +15,12 @@ class Posts extends Component {
 
     render(){
         
-        const documento = this.props.info.data
+        console.log(this.props);
         return (
             <View style={styles.container}>
                 <View>
-                    <Text style={styles.messageOwner}>{documento.owner}</Text>
-                    <Text style={styles.messageText}>{documento.posts}</Text>
+                    <Text style={styles.postOwner}>{documento.owner}</Text>
+                    <Text style={styles.postText}>{documento.posts}</Text>
                 </View>
                 {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments')}>
                     <Text>Commentar esta publicacion</Text>
@@ -43,6 +43,13 @@ const styles= StyleSheet.create({
         marginHorizontal:10,
         marginTop:8
     },
+    postOwner:{
+        flex: 2,
+
+    },
+    postText:{
+        flex: 1
+    }
    
 })
 

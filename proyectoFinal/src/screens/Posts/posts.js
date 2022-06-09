@@ -14,6 +14,7 @@ class posts extends Component {
   return (
     <View>
 
+
     </View>
   )
 }

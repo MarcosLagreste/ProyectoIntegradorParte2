@@ -14,6 +14,7 @@ class Comments extends Component {
   return (
     <View>
 
+
     </View>
   )
 }

@@ -44,7 +44,7 @@ class Register extends Component {
           placeholder='password'
           secureTextEntry={true}
         />
-        <TouchableOpacity style={styles.btn} onPress={
+        <TouchableOpacity style={styles.boton} onPress={
           () => {
             signUp(this.state.email, this.state.password)
           }}>
@@ -56,7 +56,7 @@ class Register extends Component {
         <Text>
           Ya tienes una cuenta?
         </Text>
-        <TouchableOpacity style={styles.btn} onPress={()=>this.props.navigation.navigate('Login')}>
+        <TouchableOpacity style={styles.boton} onPress={()=>this.props.navigation.navigate('Login')}>
         <Text>
           Ir al login
         </Text>
@@ -72,7 +72,7 @@ const styles =  StyleSheet.create({
     borderColor:'black',
     marginTop:16
   },
-  btn:{
+  boton:{
     flex:1,
     marginVertical:16,
     padding:16,
