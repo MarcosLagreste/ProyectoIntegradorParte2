@@ -6,7 +6,7 @@ import Profile from '../screens/Profile/Profile'
 const Tab = createBottomTabNavigator()
 
  function TabNavigation(props) {
- // const{logout} = props.route.params
+ const{logout} = props.route.params
   console.log(props);
     return (
     <Tab.Navigator>
