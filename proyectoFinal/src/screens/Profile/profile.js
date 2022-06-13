@@ -1,16 +1,48 @@
 import { View, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, {Component} from 'react'
+import { auth, db } from '../../firebase/config';
 
-export default function Profile(props) {
-  console.log(props.route);
+
+class Profile extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+      userData: {}
+    }
+  }
+componentDidMount(){
+  db.collection('users')
+  .where('email','==',auth.currentUser.email).onSnapshot(docs => {
+    docs.forEach(doc => {
+     this.setState(
+      {
+        userData:doc.data()
+      },
+      ()=> console.log(this.state.userData)) 
+    })
+    
+  })
+}
+  
+  render(){
+      // console.log(props.route);
+    console.log(auth.currentUser)
+    console.log(db.collection('users'))
+    const userEmail = this.state.userData.email
+    const userName = this.state.userData.userName
+    const date = auth.currentUser.metadata.lastSignInTime
   return (
     <View>
       <Text>Profile</Text>
-      <TouchableOpacity onPress={(Out)=> props.route.params.logout(Out)}>
+      <Text>{userEmail}</Text>
+      <Text>Hola {userName}</Text>
+      <Text>Last loggedIn: {date}</Text>
+      <TouchableOpacity onPress={()=> this.props.route.params.logout()}>
           <Text>
               Cerrar sesion
           </Text>
       </TouchableOpacity>
     </View>
   )
-}
+}}
+export default Profile

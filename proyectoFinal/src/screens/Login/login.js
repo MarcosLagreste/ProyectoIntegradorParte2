@@ -6,10 +6,12 @@ class Login extends Component {
     super(props)
     this.state={
       email:'',
-      password:''
+      password:'',
     }
   }
   
+
+
   render(){
     const {signIn} = this.props.route.params
     return (

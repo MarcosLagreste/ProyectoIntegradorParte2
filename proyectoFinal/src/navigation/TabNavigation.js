@@ -7,7 +7,7 @@ const Tab = createBottomTabNavigator()
 
  function TabNavigation(props) {
  const{logout} = props.route.params
-  console.log(props);
+
     return (
     <Tab.Navigator>
         <Tab.Screen name='Home' component={Home} />
@@ -15,7 +15,7 @@ const Tab = createBottomTabNavigator()
         name='Profile' 
         component={Profile} 
         initialParams={{
-            logout: (Out) => logout(Out)
+            logout: () => logout()
         }}
         />
     </Tab.Navigator>
