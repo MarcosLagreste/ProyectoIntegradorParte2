@@ -38,9 +38,16 @@ class StackNavigation extends Component{
     }
 
     
-    signUp(email, password){
+    signUp(email, password, userName){
         auth.createUserWithEmailAndPassword(email, password)
-        .then(response => this.setState({logedIn: true}))
+        .then(response => {
+            db.collection("users").add({
+            email: email,
+            userName: userName, 
+            createdAt: Date.now(),
+            posts: []
+        })})
+        .then(response => this.setState({logedIn: true})) 
         .catch(error => this.setState({errorMessage:error.message}))
     }
 
@@ -48,6 +55,9 @@ class StackNavigation extends Component{
     signIn(email, password){
         auth.signInWithEmailAndPassword(email, password)
         .then(response => {
+            //nescesitamos traer al user y actualizarle lastLogin
+            //db.collection('users').doc
+            console.log(response.user.metadata);
             this.setState({
                 loggedIn:true
             })
@@ -72,7 +82,7 @@ class StackNavigation extends Component{
                             }}
                             initialParams={
                                 {
-                                    logout: (Out) => this.logout(Out),
+                                    logout: () => this.logout(),
                                     errorMessage: this.message
                                 }
                             }
@@ -96,7 +106,7 @@ class StackNavigation extends Component{
     
                                 children={
                                     (props)=> <Register 
-                                    signUp={(email, password)=> this.signUp(email, password)}
+                                    signUp={(email, password, userName)=> this.signUp(email, password, userName)}
                                     errorMessage={this.state.errorMessage}
                                     {...props}
                                     />
