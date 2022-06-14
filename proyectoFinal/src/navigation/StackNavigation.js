@@ -9,7 +9,7 @@ import Register from "../screens/Register/Register";
 import { StatusBar } from 'expo-status-bar';
 import TabNavigation from './TabNavigation';
 import Comments from '../screens/Comments/Comments'
-import Posts from '../screens/Posts/Posts';
+import Posts from '../screens/Posts/posts';
 
 const Stack = createNativeStackNavigator()
 
@@ -65,7 +65,6 @@ class StackNavigation extends Component{
         .catch(error =>this.setState({errorMessage: error.message}))
     }
 
-
     render(){
         return(
             <NavigationContainer
@@ -75,25 +74,25 @@ class StackNavigation extends Component{
                          this.state.loggedIn ?
                         <Stack.Group>
                            <Stack.Screen 
-                            name='TabNavigation' 
-                            component={TabNavigation}
-                            options={{
-                                headerShown:false
-                            }}
-                            initialParams={
-                                {
-                                    logout: () => this.logout(),
-                                    errorMessage: this.message
+                                name='TabNavigation' 
+                                component={TabNavigation}
+                                options={{
+                                    headerShown:false
+                                }}
+                                initialParams={
+                                    {
+                                        logout: () => this.logout(),
+                                        errorMessage: this.message
+                                    }
                                 }
-                            }
-                             />
-                        {/* //     <Stack.Screen
-                        //         name='Post'
-                        //         component={Posts}
-                        //         initialParams={{
-
-                        //         }}
-                        //     />
+                            />
+                            <Stack.Screen 
+                                name='Posts'
+                                component={Posts}
+                            />
+                        
+                        
+                        {
                             /* <Stack.Screen
                                 name='Comments'
                                 component={Comments}
