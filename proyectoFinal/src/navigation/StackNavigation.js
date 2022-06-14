@@ -66,17 +66,18 @@ class StackNavigation extends Component{
     }
 
     nuevoPost(description){
-        db.collection('posts').add({
-            owner: auth.currentUser.email,
-            createdAt: Date.now(),
-            description: description,
-            likes: [],
-            comments:[],
-            photo: ''
-          
-        })
-        .then()
-        .catch(e=> console.log(e))
+        if(description !== ''){
+            db.collection('posts').add({
+                owner: auth.currentUser.email,
+                createdAt: Date.now(),
+                description: description,
+                likes: [],
+                comments:[],
+                photo: ''
+            })
+            .then()
+            .catch(e=> console.log(e))
+        }  
       }
 
     render(){
@@ -105,14 +106,11 @@ class StackNavigation extends Component{
                                 component={AgregarPosts}
                                 initialParams={{nuevoPost: (description) => this.nuevoPost(description)}}
                             />
-                        
-                        
-                        {
-                            /* <Stack.Screen
+                            <Stack.Screen
                                 name='Comments'
                                 component={Comments}
-                            /> */ }
-                         </Stack.Group>
+                            /> 
+                        </Stack.Group>
                          :
                         <Stack.Group>
                             <Stack.Screen 

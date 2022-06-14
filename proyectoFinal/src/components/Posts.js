@@ -87,11 +87,10 @@ class Posts extends Component {
                         <FontAwesome name='heart-o' size={24} color='black'/>
                     </TouchableOpacity>
                     }
-
                 </View>
-                {/* <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments')}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments', {id: this.props.info.id, pie: this.props.info.data.description})}>
                     <Text>Commentar esta publicacion</Text>
-                </TouchableOpacity> */}
+                </TouchableOpacity> 
             </View>
             
         )
