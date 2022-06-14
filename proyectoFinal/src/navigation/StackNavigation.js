@@ -9,7 +9,7 @@ import Register from "../screens/Register/Register";
 import { StatusBar } from 'expo-status-bar';
 import TabNavigation from './TabNavigation';
 import Comments from '../screens/Comments/Comments'
-import Posts from '../screens/Posts/posts';
+import AgregarPosts from '../screens/AgregarPosts/AgregarPosts';
 
 const Stack = createNativeStackNavigator()
 
@@ -65,6 +65,20 @@ class StackNavigation extends Component{
         .catch(error =>this.setState({errorMessage: error.message}))
     }
 
+    nuevoPost(description){
+        db.collection('posts').add({
+            owner: auth.currentUser.email,
+            createdAt: Date.now(),
+            description: description,
+            likes: [],
+            comments:[],
+            photo: ''
+          
+        })
+        .then()
+        .catch(e=> console.log(e))
+      }
+
     render(){
         return(
             <NavigationContainer
@@ -87,8 +101,9 @@ class StackNavigation extends Component{
                                 }
                             />
                             <Stack.Screen 
-                                name='Posts'
-                                component={Posts}
+                                name='AgregarPosts'
+                                component={AgregarPosts}
+                                initialParams={{nuevoPost: (description) => this.nuevoPost(description)}}
                             />
                         
                         
