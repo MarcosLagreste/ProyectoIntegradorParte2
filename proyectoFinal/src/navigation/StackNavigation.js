@@ -65,7 +65,7 @@ class StackNavigation extends Component{
         .catch(error =>this.setState({errorMessage: error.message}))
     }
 
-    nuevoPost(description){
+    nuevoPost(description, photo){
         if(description !== ''){
             db.collection('posts').add({
                 owner: auth.currentUser.email,
@@ -73,7 +73,7 @@ class StackNavigation extends Component{
                 description: description,
                 likes: [],
                 comments:[],
-                photo: ''
+                photo: photo
             })
             .then()
             .catch(e=> console.log(e))
@@ -104,7 +104,10 @@ class StackNavigation extends Component{
                             <Stack.Screen 
                                 name='AgregarPosts'
                                 component={AgregarPosts}
-                                initialParams={{nuevoPost: (description) => this.nuevoPost(description)}}
+                                initialParams={{
+                                    nuevoPost: (description, photo) => this.nuevoPost(description, photo)
+                                }}
+                                options={{unmountOnBlur: true}}
                             />
                             <Stack.Screen
                                 name='Comments'

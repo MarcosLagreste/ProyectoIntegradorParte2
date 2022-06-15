@@ -14,16 +14,15 @@ class Comments extends Component {
       }
 
     componentDidMount(){
+      console.log(this.props)
       db.collection('posts')
       .doc(this.props.route.params.id)
       .onSnapshot( doc => {
         this.setState({
           comentarios: doc.data().comments
         })
-
         }
       )
-
     }
 
     onSubmit(elComentario){
