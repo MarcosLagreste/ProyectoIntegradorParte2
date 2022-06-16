@@ -11,6 +11,7 @@ class Posts extends Component {
         super(props)
         this.state={
             cantLikes: 0,
+            cantComments: 0,
             miLike: false,
             arrLikes: [],
             arrComentarios: []
@@ -24,6 +25,11 @@ class Posts extends Component {
         if(documento.likes){
             this.setState({
                 cantLikes: documento.likes.length
+            })
+        }
+        if(documento.comments){
+            this.setState({
+                cantComments: documento.comments.length
             })
         }
 
@@ -79,23 +85,24 @@ class Posts extends Component {
                     source={{uri: `${documento.photo}`}}
                     resizeMode='contain' 
                     />
+                    <View style={styles.containerLike}>
+                        <Text>Likes: {this.state.cantLikes}</Text>
+                        {this.state.miLike ?
+                        <TouchableOpacity onPress={()=> this.unlike()}>
+                            <FontAwesome name='heart' size={24} color='red'/>
+                        </TouchableOpacity>
+                        :
+                        <TouchableOpacity onPress={()=> this.like()}>
+                            <FontAwesome name='heart-o' size={24} color='black'/>
+                        </TouchableOpacity>
+                        }
+                    </View>
                     <Text style={styles.postText}>{documento.description}</Text>
-                </View>
-                <View style={styles.containerLike}>
-                    <Text>Likes: {this.state.cantLikes}</Text>
-                    {this.state.miLike ?
-                    <TouchableOpacity onPress={()=> this.unlike()}>
-                        <FontAwesome name='heart' size={24} color='red'/>
-                    </TouchableOpacity>
-                    :
-                    <TouchableOpacity onPress={()=> this.like()}>
-                        <FontAwesome name='heart-o' size={24} color='black'/>
-                    </TouchableOpacity>
-                    }
-                </View>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments', {id: this.props.info.id, pie: this.props.info.data.description})}>
-                    <Text>Commentar esta publicacion</Text>
-                </TouchableOpacity> 
+                    <Text>Cantidad de Comentarios: {this.state.cantComments}</Text>
+                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments', {id: this.props.info.id, pie: this.props.info.data.description})}>
+                    <Text>Comentar esta publicacion</Text>
+                    </TouchableOpacity> 
+                </View>                
             </View>
             
         )

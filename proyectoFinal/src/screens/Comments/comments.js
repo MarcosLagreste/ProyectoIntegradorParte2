@@ -7,6 +7,7 @@ class Comments extends Component {
     constructor(props){
         super(props)
         this.state={
+          cantComentarios: 0,
           comentarios: [],
           nuevoComentario: ''
     
@@ -14,15 +15,21 @@ class Comments extends Component {
       }
 
     componentDidMount(){
-      console.log(this.props)
       db.collection('posts')
       .doc(this.props.route.params.id)
       .onSnapshot( doc => {
         this.setState({
           comentarios: doc.data().comments
+        }, ()=> {
+          if(this.state.comentarios){
+            this.setState({
+                cantComentarios: this.state.comentarios.length
+            })
+          }
         })
         }
       )
+      
     }
 
     onSubmit(elComentario){
@@ -39,7 +46,8 @@ class Comments extends Component {
           comments: firebase.firestore.FieldValue.arrayUnion(comment)
         })
         .then(response => this.setState({
-          nuevoComentario: ''
+          nuevoComentario: '',
+          cantComentarios: this.state.cantComentarios + 1
         }))
         .catch(e => console.log(e))
       }
@@ -49,11 +57,15 @@ class Comments extends Component {
   return (
     <View>
       <Text>{this.props.route.params.pie}</Text>
-      <FlatList
-      data={this.state.comentarios}
-      keyExtractor={item => item.createdAt.toString()}
-      renderItem={({item}) => <View><Text>{item.owner}</Text><Text>{item.description}</Text></View>}
-      />
+      {this.state.cantComentarios === 0 ?
+        <Text>Aun no hay comentarios. Se el primero en opinar.</Text>
+      : <FlatList
+        data={this.state.comentarios}
+        keyExtractor={item => item.createdAt.toString()}
+        renderItem={({item}) => <View><Text>{item.owner}</Text><Text>{item.description}</Text></View>}
+        />
+      }
+      
       <View>
         <TextInput
         placeholder='Agrega tu comentario'
