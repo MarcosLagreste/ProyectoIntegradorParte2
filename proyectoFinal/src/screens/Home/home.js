@@ -25,7 +25,7 @@ class Home extends Component {
         this.setState({
           posteos: posts,
           loading: false
-        }, ()=> console.log(this.state.posteos))  
+        })//, ()=> console.log(this.state.posteos))  
         })
       }
     )

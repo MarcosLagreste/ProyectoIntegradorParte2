@@ -67,13 +67,13 @@ class Comments extends Component {
       }
       
       <View>
-        <TextInput
+        <TextInput style={styles.textI}
         placeholder='Agrega tu comentario'
         onChangeText={(text) => this.setState({nuevoComentario: text})}
         value={this.state.nuevoComentario}
         />
-        <TouchableOpacity onPress={() => this.onSubmit(this.state.nuevoComentario)}>
-          <Text>Enviar</Text>
+        <TouchableOpacity style={styles.btn} onPress={() => this.onSubmit(this.state.nuevoComentario)}>
+          <Text style={styles.btnT}>Enviar</Text>
         </TouchableOpacity>
       </View>
 
@@ -82,4 +82,29 @@ class Comments extends Component {
   )
 }
 }
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
+  image: {
+    height: 400
+  },
+  textI:{
+    fontSize: 15,
+    borderWidth:2, 
+    margin:2
+  },
+  btn:{
+    borderWidth:1,
+    borderRadius:5,
+    paddingHorizontal:10,
+    backgroundColor:'grey',
+    marginTop: 10,
+    marginRight: 'auto',
+  },
+  btnT:{
+    color: 'white',
+    fontSize: 15,
+  },
+})
 export default Comments

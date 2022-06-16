@@ -1,13 +1,15 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, FlatList, ActivityIndicator, StyleSheet } from 'react-native'
 import React, {Component} from 'react'
 import { auth, db } from '../../firebase/config';
+import Posts from '../../components/Posts';
 
 
 class Profile extends Component {
   constructor(props){
     super(props)
     this.state={
-      userData: {}
+      userData: {},
+      posts : []
     }
   }
 componentDidMount(){
@@ -20,28 +22,58 @@ componentDidMount(){
       },
       ()=> console.log(this.state.userData)) 
     })
-    
   })
+  db.collection('posts')
+  .where('email','==',auth.currentUser.email).onSnapshot
+      (docs => {
+        let posts = []
+        docs.forEach(doc => {
+          posts.push({
+            id: doc.id,
+            data: doc.data()
+          })
+        this.setState({
+          posteos: posts,
+          loading: false
+        }, ()=> console.log(this.state.posteos))  
+        })
+      }
+    )
 }
   
   render(){
       // console.log(props.route);
-    console.log(auth.currentUser)
-    console.log(db.collection('users'))
+    //console.log(auth.currentUser)
+    //console.log(db.collection('users'))
     const userEmail = this.state.userData.email
     const userName = this.state.userData.userName
     const date = auth.currentUser.metadata.lastSignInTime
   return (
     <View>
+      <View>
       <Text style={styles.nombrePagina}>My Profile</Text>
       <Text style={styles.email}>{userEmail}</Text>
       <Text style={styles.userN}>Hola {userName}</Text>
       <Text style={styles.day}>Last loggedIn: {date}</Text>
+      </View>
       <TouchableOpacity style={styles.btn} onPress={()=> this.props.route.params.logout()}>
-          <Text style={styles.btnC}>
+          <Text style={styles.btnT}>
               Cerrar sesion
           </Text>
       </TouchableOpacity>
+      <View style={styles.container}>
+      {this.state.loading ? 
+       <ActivityIndicator
+       size={30}
+       color='black'/>
+       :
+       <FlatList 
+          data={this.state.posteos}
+          keyExtractor={item=>item.id.toString()}
+          renderItem={({item}) => <Posts info={item} navigation={this.props.navigation}/> }
+          />
+        }
+       </View>
     </View>
   )
 }}
@@ -75,9 +107,12 @@ const styles = StyleSheet.create({
     paddingHorizontal:8,
     marginHorizontal:'auto',
   },
-  btnC:{
+  btnT:{
     color: 'white',
     fontSize: 20
+  },
+  container:{
+    flex:1
   }
 
 

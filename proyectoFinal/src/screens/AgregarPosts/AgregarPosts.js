@@ -36,18 +36,18 @@ class AgregarPosts extends Component {
             source={{uri: `${this.state.urlFoto}`}}
             resizeMode='contain' 
             />
-          <TextInput 
+          <TextInput style={styles.textI}
               placeholder='Pie de foto'
               onChangeText={text => this.setState({description: text})}
               value={this.state.description}
           />
 
-          <TouchableOpacity onPress={() => {
+          <TouchableOpacity style={styles.btn} onPress={() => {
               this.props.route.params.nuevoPost(this.state.description, this.state.urlFoto)
               this.setState({description: ''})
               this.props.navigation.navigate('Home')
               }}>
-            <Text>Subir</Text>
+            <Text style={styles.btnT}>Subir</Text>
           </TouchableOpacity>
           </>
         }
@@ -62,7 +62,25 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 400
-  }
+  },
+  textI:{
+    fontSize: 18,
+    borderWidth:2, 
+    margin:5
+  },
+  btn:{
+    borderWidth:1,
+    borderRadius:5,
+    paddingHorizontal:10,
+    backgroundColor:'grey',
+    marginTop: 10,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  btnT:{
+    color: 'white',
+    fontSize: 30,
+  },
 })
 
 
