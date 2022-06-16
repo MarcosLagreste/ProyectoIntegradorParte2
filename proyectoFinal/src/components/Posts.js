@@ -77,6 +77,7 @@ class Posts extends Component {
     render(){
         
         const documento = this.props.info.data
+        const dia = documento.createdAt
         return (
             <View style={styles.container}>
                 <View>
@@ -99,8 +100,9 @@ class Posts extends Component {
                     </View>
                     <Text style={styles.postText}>{documento.description}</Text>
                     <Text>Cantidad de Comentarios: {this.state.cantComments}</Text>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('Comments', {id: this.props.info.id, pie: this.props.info.data.description})}>
-                    <Text>Comentar esta publicacion</Text>
+                    <Text>Fecha de creacion: {dia}</Text>
+                    <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('Comments', {id: this.props.info.id, pie: this.props.info.data.description})}>
+                    <Text style={styles.btnT}>Comentar esta publicacion</Text>
                     </TouchableOpacity> 
                 </View>                
             </View>
@@ -130,7 +132,16 @@ const styles= StyleSheet.create({
     },
     image: {
         height: 400
-    }
+    },
+    btn:{
+        borderWidth:2,
+        backgroundColor:'grey',
+        paddingHorizontal:10,
+      },
+      btnT:{
+        color: 'white',
+        fontSize: 15
+      }
    
 })
 
