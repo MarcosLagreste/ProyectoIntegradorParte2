@@ -35,10 +35,6 @@ class Home extends Component {
   render(){
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.props.navigation.navigate('AgregarPosts')}>
-          <Text>Agregar Post</Text>
-        </TouchableOpacity>
-
        <Text>Estos son los posts recientes:</Text>
        {this.state.loading ? 
        <ActivityIndicator

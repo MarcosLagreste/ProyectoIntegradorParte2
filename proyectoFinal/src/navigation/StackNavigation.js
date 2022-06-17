@@ -97,6 +97,7 @@ class StackNavigation extends Component{
                                 initialParams={
                                     {
                                         logout: () => this.logout(),
+                                        nuevoPost: (description, photo) => this.nuevoPost(description, photo),
                                         errorMessage: this.message
                                     }
                                 }
