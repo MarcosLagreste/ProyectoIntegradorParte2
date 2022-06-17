@@ -62,7 +62,7 @@ class Comments extends Component {
       : <FlatList
         data={this.state.comentarios}
         keyExtractor={item => item.createdAt.toString()}
-        renderItem={({item}) => <View><Text>{item.owner}</Text><Text>{item.description}</Text></View>}
+        renderItem={({item}) => <View style={styles.container}><Text style={styles.textO}>{item.owner}</Text><Text style={styles.textD}>{item.description}</Text></View>}
         />
       }
       
@@ -92,7 +92,8 @@ const styles = StyleSheet.create({
   textI:{
     fontSize: 15,
     borderWidth:2, 
-    margin:2
+    margin:2,
+    maxWidth: 'fit-content'
   },
   btn:{
     borderWidth:1,
@@ -104,7 +105,15 @@ const styles = StyleSheet.create({
   },
   btnT:{
     color: 'white',
-    fontSize: 15,
+    fontSize: 20,
   },
+  textO:{
+    marginTop:10,
+  },
+  textD:{
+    fontSize: 15,
+    fontWeight: 500,
+    textTransform: 'capitalize'
+  }
 })
 export default Comments
