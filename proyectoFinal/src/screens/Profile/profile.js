@@ -9,7 +9,8 @@ class Profile extends Component {
     super(props)
     this.state={
       userData: {},
-      posts : []
+      posteos: [], 
+      loading: true
     }
   }
 componentDidMount(){
@@ -24,7 +25,7 @@ componentDidMount(){
     })
   })
   db.collection('posts')
-  .where('email','==',auth.currentUser.email).onSnapshot
+  .where('owner','==',auth.currentUser.email).onSnapshot
       (docs => {
         let posts = []
         docs.forEach(doc => {
@@ -56,13 +57,9 @@ componentDidMount(){
       <Text style={styles.userN}>Hola {userName}</Text>
       <Text style={styles.day}>Last loggedIn: {date}</Text>
       </View>
-      <TouchableOpacity style={styles.btn} onPress={()=> this.props.route.params.logout()}>
-          <Text style={styles.btnT}>
-              Cerrar sesion
-          </Text>
-      </TouchableOpacity>
       <View style={styles.container}>
-      {this.state.loading ? 
+       <Text>Estos son tus posts:</Text>
+       {this.state.loading ? 
        <ActivityIndicator
        size={30}
        color='black'/>
@@ -70,10 +67,17 @@ componentDidMount(){
        <FlatList 
           data={this.state.posteos}
           keyExtractor={item=>item.id.toString()}
-          renderItem={({item}) => <Posts info={item} navigation={this.props.navigation}/> }
+          renderItem={({item}) => <Posts info={item} navigation={this.props.navigation}/> }  //<Text>{item.data.description}</Text>}
           />
-        }
-       </View>
+       }
+       
+       
+      </View>
+      <TouchableOpacity style={styles.btn} onPress={()=> this.props.route.params.logout()}>
+          <Text style={styles.btnT}>
+              Cerrar sesion
+          </Text>
+      </TouchableOpacity>
     </View>
   )
 }}
