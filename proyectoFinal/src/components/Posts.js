@@ -43,7 +43,6 @@ class Posts extends Component {
 
     like(){
         const documento = this.props.info
-
         db.collection('posts')
         .doc(documento.id)
         .update({
@@ -99,7 +98,7 @@ class Posts extends Component {
                         }
                     </View>
                     <Text style={styles.postText}>{documento.description}</Text>
-                    <Text>Cantidad de Comentarios: {this.state.cantComments}</Text>
+                    <Text>Comments: {this.state.cantComments}</Text>
                     <Text>Fecha de creacion: {dia}</Text>
                     <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('Comments', {id: this.props.info.id, pie: this.props.info.data.description})}>
                     <Text style={styles.btnT}>Comentar esta publicacion</Text>
@@ -131,7 +130,7 @@ const styles= StyleSheet.create({
         flex: 1
     },
     image: {
-        height: 400
+        height: 200
     },
     btn:{
         borderWidth:2,

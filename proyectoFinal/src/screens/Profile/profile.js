@@ -24,7 +24,7 @@ componentDidMount(){
       ()=> console.log(this.state.userData)) 
     })
   })
-  db.collection('posts')
+  db.collection('posts').orderBy('createdAt', 'desc')
   .where('owner','==',auth.currentUser.email).onSnapshot
       (docs => {
         let posts = []
