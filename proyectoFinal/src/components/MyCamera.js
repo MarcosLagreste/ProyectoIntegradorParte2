@@ -71,10 +71,10 @@ class MyCamera extends Component {
                 />
                 <View style={styles.buttons2}>
                   <TouchableOpacity style={styles.btn} onPress={() => this.aceptarFoto()}>
-                    <Text style={styles.btnT1}>Aceptar</Text>
+                    <Text style={styles.btnT1}>Accept</Text>
                   </TouchableOpacity>
                   <TouchableOpacity style={styles.btn} onPress={() => this.rechazarFoto()}>
-                    <Text style={styles.btnT1}>Rechazar</Text>
+                    <Text style={styles.btnT1}>Decline</Text>
                   </TouchableOpacity>
                 </View>
               </>
@@ -87,13 +87,13 @@ class MyCamera extends Component {
                 />
                 <View style={styles.buttons}>
                     <TouchableOpacity style={styles.btn} onPress={() => this.sacarFoto()}>
-                        <Text style={styles.btnT}>Tomar Foto</Text>
+                        <Text style={styles.btnT}>Take Picture</Text>
                     </TouchableOpacity>
                 </View>
               </>
         
           : 
-          <Text>Lo siento, no tienes permiso para usar la camara</Text>
+          <Text style={styles.text}>Sorry, you don't have permission to access the camera</Text>
           }
           
       </View>
@@ -137,10 +137,15 @@ const styles = StyleSheet.create({
     },
     btnT1:{
       color: 'azure',
-      fontSize: 20
+      fontSize: 20,
     },
     buttons2: {
       flex: 2
   },
+  text:{
+    padding: 10,
+    fontSize: 16,
+    color: 'crimson',
+  }
 })
 export default MyCamera

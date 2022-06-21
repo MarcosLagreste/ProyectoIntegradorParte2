@@ -76,7 +76,7 @@ class Profile extends Component {
       <View style={styles.container}>
       <TouchableOpacity style={styles.btn} onPress={()=> this.props.route.params.logout()}>
           <Text style={styles.btnT}>
-              Cerrar sesion
+              Log Out
           </Text>
       </TouchableOpacity>
       </View>

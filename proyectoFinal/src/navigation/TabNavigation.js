@@ -17,7 +17,7 @@ const Tab = createBottomTabNavigator()
           component={Home} 
         />
         <Tab.Screen
-          name='AgregarPosts'
+          name='Add a new post'
           component={AgregarPosts}
           initialParams={{
             nuevoPost: (description, photo) => props.route.params.nuevoPost(description, photo)
