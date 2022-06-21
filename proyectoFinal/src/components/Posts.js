@@ -85,7 +85,7 @@ class Posts extends Component {
     render(){
         
         const documento = this.props.info.data
-        const dia = documento.createdAt
+        //const dia = documento.createdAt
         const postOwner = documento.owner
         return (
             <View style={styles.container}>
@@ -116,7 +116,7 @@ class Posts extends Component {
                     </View>
                     <Text style={styles.postText}>{documento.description}</Text>
                     <Text>Comments: {this.state.cantComments}</Text>
-                    <Text>creation date: {dia}</Text>
+                    {/* <Text>creation date: {dia}</Text> */}
                     <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('Comments', {id: this.props.info.id, pie: this.props.info.data.description})}>
                     <Text style={styles.btnT}>Coment this post</Text>
                     </TouchableOpacity>
