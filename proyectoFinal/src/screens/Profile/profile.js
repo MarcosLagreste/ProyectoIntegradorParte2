@@ -57,6 +57,11 @@ componentDidMount(){
       <Text style={styles.userN}>Hola {userName}</Text>
       <Text style={styles.day}>Last loggedIn: {date}</Text>
       </View>
+      <TouchableOpacity style={styles.btn} onPress={()=> this.props.route.params.logout()}>
+          <Text style={styles.btnT}>
+              Cerrar sesion
+          </Text>
+      </TouchableOpacity>
       <View style={styles.container}>
        <Text>Estos son tus posts:</Text>
        {this.state.loading ? 
@@ -70,15 +75,6 @@ componentDidMount(){
           renderItem={({item}) => <Posts info={item} navigation={this.props.navigation}/> }  //<Text>{item.data.description}</Text>}
           />
        }
-       
-       
-      </View>
-      <View style={styles.container}>
-      <TouchableOpacity style={styles.btn} onPress={()=> this.props.route.params.logout()}>
-          <Text style={styles.btnT}>
-              Cerrar sesion
-          </Text>
-      </TouchableOpacity>
       </View>
     </View>
   )
