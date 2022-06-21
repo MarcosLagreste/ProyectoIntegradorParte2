@@ -73,11 +73,13 @@ componentDidMount(){
        
        
       </View>
+      <View style={styles.container}>
       <TouchableOpacity style={styles.btn} onPress={()=> this.props.route.params.logout()}>
           <Text style={styles.btnT}>
               Cerrar sesion
           </Text>
       </TouchableOpacity>
+      </View>
     </View>
   )
 }}
@@ -103,13 +105,16 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   btn:{
-    flex:1,
     borderWidth:1,
     borderRadius:5,
     backgroundColor:'black',
-    paddingVertical:16,
+    paddingVertical:6,
     paddingHorizontal:8,
     marginHorizontal:'auto',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    textAlign: 'center',
+    width: '50%'
   },
   btnT:{
     color: 'white',

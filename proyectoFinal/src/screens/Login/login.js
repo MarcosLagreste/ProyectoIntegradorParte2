@@ -13,7 +13,7 @@ class Login extends Component {
 
 
   render(){
-    const {signIn} = this.props.route.params
+    const {signIn} = this.props
     return (
       <View>
         <TextInput
@@ -34,6 +34,9 @@ class Login extends Component {
             Loguearme
           </Text>
         </TouchableOpacity>
+        <View style={this.props.loginError ? styles.showError : styles.hideError}>          
+        <Text style={styles.errorText}>{this.props.loginError}</Text>
+        </View>
         <Text>
           No tienes una cuenta?
         </Text>
@@ -62,6 +65,19 @@ const styles = StyleSheet.create({
     paddingVertical:16,
     paddingHorizontal:8,
     marginHorizontal:'auto',
+  },
+  hideError:{
+    display: 'flex',
+    backgroundColor: 'white',
+    borderRadius: 5,
+    padding: 7,
+    opacity: 0
+  },
+  showError:{
+    display: 'flex',
+    backgroundColor: 'red',
+    borderRadius: 5,
+    padding: 7,
   },
 })
 

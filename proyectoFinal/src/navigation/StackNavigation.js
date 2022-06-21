@@ -18,7 +18,8 @@ class StackNavigation extends Component{
         super(props)
         this.state={
             loggedIn: false,
-            errorMessage:'Error1'
+            loginError:'',
+            registerError:'',
         }
     }
     
@@ -45,10 +46,12 @@ class StackNavigation extends Component{
             email: email,
             userName: userName, 
             createdAt: Date.now(),
-            posts: []
         })})
         .then(response => this.setState({logedIn: true})) 
-        .catch(error => this.setState({errorMessage:error.message}))
+        .catch(error => this.setState({registerError: `Problems because of ${error.message}`}))
+        .catch(e => {
+            this.setState({registerError: error.message})
+        })
     }
 
 
@@ -62,7 +65,7 @@ class StackNavigation extends Component{
                 loggedIn:true
             })
         })
-        .catch(error =>this.setState({errorMessage: error.message}))
+        .catch(error =>this.setState({loginError: error.message}))
     }
 
     nuevoPost(description, photo){
@@ -123,7 +126,7 @@ class StackNavigation extends Component{
                                 children={
                                     (props)=> <Register 
                                     signUp={(email, password, userName)=> this.signUp(email, password, userName)}
-                                    errorMessage={this.state.errorMessage}
+                                    registerError={this.state.registerError}
                                     {...props}
                                     />
                     
@@ -134,10 +137,13 @@ class StackNavigation extends Component{
                             />
                             <Stack.Screen 
                             name='Login' 
-                            component={Login}
-                            initialParams={{
-                                signIn: (email, password)=> this.signIn(email, password)
-                            }}
+                            children={
+                                (props)=> <Login 
+                                signIn= {(email, password)=> this.signIn(email, password)}
+                                loginError={this.state.loginError}
+                                {...props}
+                                />
+                            }
                             options={{
                                 headerShown:false
                             }}

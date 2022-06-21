@@ -3,6 +3,7 @@ import React, {Component} from 'react'
 import Home from '../screens/Home/Home'
 import Profile from '../screens/Profile/Profile'
 import AgregarPosts from '../screens/AgregarPosts/AgregarPosts'
+import Search from '../screens/Search/Search'
 
 const Tab = createBottomTabNavigator()
 
@@ -29,6 +30,10 @@ const Tab = createBottomTabNavigator()
           initialParams={{
               logout: () => logout()
           }}
+        />
+        <Tab.Screen 
+          name='Search' 
+          component={Search}
         />
     </Tab.Navigator>
   )

@@ -50,6 +50,7 @@ class Register extends Component {
           placeholder='password'
           secureTextEntry={true}
         />
+        {this.state.email !== '' && this.state.userName !== '' && this.state.password !== '' ?
         <TouchableOpacity style={styles.boton} onPress={
           () => {
             signUp(this.state.email, this.state.password, this.state.userName)
@@ -58,7 +59,17 @@ class Register extends Component {
             Register
           </Text>
         </TouchableOpacity>
-
+        :
+        <View>
+        <Text>Por favor completar los campos</Text>
+        <Text>ejemplo de Email: ejemplo@ejemplo.com</Text>
+        <Text>ejemplo de userName: ejemploUserName</Text>
+        <Text>ejemplo de password: ejemplo (more than 6 leters)</Text>
+        </View>
+        }
+        <View style={this.props.registerError ? styles.showError : styles.hideError}>          
+        <Text style={styles.errorText}>{this.props.registerError}</Text>
+        </View>
         <Text>
           Ya tienes una cuenta?
         </Text>
@@ -88,7 +99,20 @@ const styles =  StyleSheet.create({
     borderRadius:5,
     backgroundColor:'lightgreen',
 
-  }
+  },
+  hideError:{
+    display: 'flex',
+    backgroundColor: 'white',
+    borderRadius: 5,
+    padding: 7,
+    opacity: 0
+  },
+  showError:{
+    display: 'flex',
+    backgroundColor: 'red',
+    borderRadius: 5,
+    padding: 7,
+  },
 })
 
 export default Register
