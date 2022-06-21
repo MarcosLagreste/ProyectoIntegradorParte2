@@ -51,11 +51,11 @@ class Register extends Component {
           secureTextEntry={true}
         />
         {this.state.email !== '' && this.state.userName !== '' && this.state.password !== '' ?
-        <TouchableOpacity style={styles.boton} onPress={
+        <TouchableOpacity style={styles.button} onPress={
           () => {
             signUp(this.state.email, this.state.password, this.state.userName)
           }}>
-          <Text>
+          <Text style={styles.btnT}>
             Register
           </Text>
         </TouchableOpacity>
@@ -73,7 +73,7 @@ class Register extends Component {
         <Text style={styles.btnR}>
         Do you have an account?
         </Text>
-        <TouchableOpacity style={styles.boton} onPress={()=>this.props.navigation.navigate('Login')}>
+        <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Login')}>
         <Text style={styles.btnT}>
           Go to login
         </Text>
@@ -87,21 +87,24 @@ const styles =  StyleSheet.create({
   input:{
     borderWidth:2,
     borderColor:'black',
-    marginTop:16
+    marginVertical:8,
+    padding: 3,
   },
-  boton:{
+  button:{
     flex:1,
-    marginVertical:16,
-    padding:16,
-    borderWidth:2,
+    marginVertical:10,
+    paddingVertical:16,
+    paddingHorizontal:8,
     borderColor:'grey',
     borderWidth:1,
     borderRadius:5,
     backgroundColor:'black',
-    alignItems: 'center', 
+    alignItems: 'center',
+    marginHorizontal:'auto'
+    
   },
   btnR:{
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 'bold'
   },
   btnT:{

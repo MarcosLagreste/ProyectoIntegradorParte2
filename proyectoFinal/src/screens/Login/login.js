@@ -30,19 +30,19 @@ class Login extends Component {
           secureTextEntry={true}
         />
         <TouchableOpacity style={styles.button} onPress={() => signIn(this.state.email, this.state.password)}>
-          <Text>
+          <Text style={styles.btnT}>
             Loguearme
           </Text>
         </TouchableOpacity>
         <View style={this.props.loginError ? styles.showError : styles.hideError}>          
         <Text style={styles.errorText}>{this.props.loginError}</Text>
         </View>
-        <Text>
-          No tienes una cuenta?
+        <Text style={styles.btnR}>
+          You don't have an account?
         </Text>
         <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Register')}>
-        <Text>
-          Ir al register
+        <Text style={styles.btnT}>
+          Go to register
         </Text>
         </TouchableOpacity>
       </View>
@@ -51,19 +51,20 @@ class Login extends Component {
 }
 const styles = StyleSheet.create({
   input:{
-    borderColor: '#dcdcdc',
-        borderWidth: 1,
+    borderColor: 'black',
+        borderWidth: 2,
         borderRadius: 2,
         padding:3,
-        marginBottom:8
+        marginVertical:8
   },
   button:{
     flex:1,
     borderWidth:1,
     borderRadius:5,
-    backgroundColor:'lightgreen',
+    backgroundColor:'black',
     paddingVertical:16,
     paddingHorizontal:8,
+    alignItems: 'center',
     marginHorizontal:'auto',
   },
   hideError:{
@@ -79,6 +80,14 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 7,
   },
+  btnT:{
+    color: 'white',
+    fontSize: 20,
+  },
+  btnR:{
+    fontSize: 16,
+    fontWeight: 'bold'
+  }
 })
 
 
