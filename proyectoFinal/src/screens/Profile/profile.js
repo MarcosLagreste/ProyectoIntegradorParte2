@@ -13,34 +13,34 @@ class Profile extends Component {
       loading: true
     }
   }
-componentDidMount(){
-  db.collection('users')
-  .where('email','==',auth.currentUser.email).onSnapshot(docs => {
-    docs.forEach(doc => {
-     this.setState(
-      {
-        userData:doc.data()
-      },
-      ()=> console.log(this.state.userData)) 
+  componentDidMount(){
+    db.collection('users')
+    .where('email','==',auth.currentUser.email).onSnapshot(docs => {
+      docs.forEach(doc => {
+      this.setState(
+        {
+          userData:doc.data()
+        },
+        ()=> console.log(this.state.userData)) 
+      })
     })
-  })
-  db.collection('posts').orderBy('createdAt', 'desc')
-  .where('owner','==',auth.currentUser.email).onSnapshot
-      (docs => {
-        let posts = []
-        docs.forEach(doc => {
-          posts.push({
-            id: doc.id,
-            data: doc.data()
+    db.collection('posts').orderBy('createdAt', 'desc')
+    .where('owner','==',auth.currentUser.email).onSnapshot
+        (docs => {
+          let posts = []
+          docs.forEach(doc => {
+            posts.push({
+              id: doc.id,
+              data: doc.data()
+            })
+          this.setState({
+            posteos: posts,
+            loading: false
+          }, ()=> console.log(this.state.posteos))  
           })
-        this.setState({
-          posteos: posts,
-          loading: false
-        }, ()=> console.log(this.state.posteos))  
-        })
-      }
-    )
-}
+        }
+      )
+  }
   
   render(){
       // console.log(props.route);
@@ -49,16 +49,18 @@ componentDidMount(){
     const userEmail = this.state.userData.email
     const userName = this.state.userData.userName
     const date = auth.currentUser.metadata.lastSignInTime
+    const creation = auth.currentUser.metadata.creationTime
   return (
-    <View>
+    <View style={styles.container}>
       <View>
       <Text style={styles.nombrePagina}>My Profile</Text>
       <Text style={styles.email}>{userEmail}</Text>
-      <Text style={styles.userN}>Hola {userName}</Text>
+      <Text style={styles.userN}>Hello {userName}</Text>
       <Text style={styles.day}>Last loggedIn: {date}</Text>
+      <Text style={styles.day}>Since: {creation}</Text>
       </View>
-      <View style={styles.container}>
-       <Text>Estos son tus posts:</Text>
+      <View style={styles.flt}>
+       <Text>My posts:</Text>
        {this.state.loading ? 
        <ActivityIndicator
        size={30}
@@ -70,8 +72,6 @@ componentDidMount(){
           renderItem={({item}) => <Posts info={item} navigation={this.props.navigation}/> }  //<Text>{item.data.description}</Text>}
           />
        }
-       
-       
       </View>
       <View style={styles.container}>
       <TouchableOpacity style={styles.btn} onPress={()=> this.props.route.params.logout()}>
@@ -84,6 +84,9 @@ componentDidMount(){
   )
 }}
 const styles = StyleSheet.create({
+  flt:{
+    flex: 6
+  },
   nombrePagina:{
     borderWidth:1,
     fontSize: 18
@@ -111,8 +114,6 @@ const styles = StyleSheet.create({
     paddingVertical:6,
     paddingHorizontal:8,
     marginHorizontal:'auto',
-    paddingHorizontal: 10,
-    paddingVertical: 6,
     textAlign: 'center',
     width: '50%'
   },

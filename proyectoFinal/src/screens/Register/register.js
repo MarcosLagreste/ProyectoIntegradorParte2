@@ -61,21 +61,21 @@ class Register extends Component {
         </TouchableOpacity>
         :
         <View>
-        <Text>Por favor completar los campos</Text>
-        <Text>ejemplo de Email: ejemplo@ejemplo.com</Text>
-        <Text>ejemplo de userName: ejemploUserName</Text>
-        <Text>ejemplo de password: ejemplo (more than 6 leters)</Text>
+        <Text style={styles.emptyT}>Please complete the empty fields</Text>
+        <Text>example de Email: example@example.com</Text>
+        <Text>example de userName: exampleUserName</Text>
+        <Text>example de password: example (more than 6 leters)</Text>
         </View>
         }
         <View style={this.props.registerError ? styles.showError : styles.hideError}>          
         <Text style={styles.errorText}>{this.props.registerError}</Text>
         </View>
-        <Text>
-          Ya tienes una cuenta?
+        <Text style={styles.btnR}>
+        Do you have an account?
         </Text>
         <TouchableOpacity style={styles.boton} onPress={()=>this.props.navigation.navigate('Login')}>
-        <Text>
-          Ir al login
+        <Text style={styles.btnT}>
+          Go to login
         </Text>
         </TouchableOpacity>
       </View>
@@ -94,11 +94,19 @@ const styles =  StyleSheet.create({
     marginVertical:16,
     padding:16,
     borderWidth:2,
-    borderColor:'blue',
+    borderColor:'grey',
     borderWidth:1,
     borderRadius:5,
-    backgroundColor:'lightgreen',
-
+    backgroundColor:'black',
+    alignItems: 'center', 
+  },
+  btnR:{
+    fontSize: 14,
+    fontWeight: 'bold'
+  },
+  btnT:{
+    color: 'white',
+    fontSize: 20,
   },
   hideError:{
     display: 'flex',
@@ -113,6 +121,10 @@ const styles =  StyleSheet.create({
     borderRadius: 5,
     padding: 7,
   },
+  emptyT:{
+    fontSize: 16,
+    fontWeight: 'bold'
+  }
 })
 
 export default Register
