@@ -34,25 +34,24 @@ class Search extends Component {
 render(){
     console.log(this.state)
     return (
-        <View style={styles.container}>
+        <View style={styles.searchContainer}>
             <Text>Search</Text>
-            <View style={styles.searchContainer}>
-                        <TextInput 
-                            style={styles.TextI}
-                            keyboardType='default'
-                            placeholder='email a buscar...'
-                            value={this.state.email}
-                            onChangeText={(text) => this.setState({ email: text})}
-                        />  
-                        <TouchableOpacity
-                            style={styles.btn} 
-                            onPress={()=>this.buscar()}
-                            >
-                            <Text style={ styles.btnT}>Search</Text>
-                        </TouchableOpacity>                         
-            </View>
+                <TextInput 
+                    style={styles.textI}
+                    keyboardType='default'
+                    placeholder='email completo a buscar...'
+                    value={this.state.email}
+                    onChangeText={(text) => this.setState({ email: text})}
+                />  
+                <TouchableOpacity
+                    style={styles.btn} 
+                    onPress={()=>this.buscar()}
+                    >
+                    <Text style={ styles.btnT}>Search</Text>
+                </TouchableOpacity>                         
+           
             {this.state.encontrado ?
-                <View>
+                <View style={styles.container}>
                     <Text>Search results:</Text>
                     <FlatList 
                         data={this.state.posteos}
@@ -61,53 +60,31 @@ render(){
                     />
                 </View>
                 :
-                        <Text>El usuario no existe o no hay posteos del mismo</Text>
-                    }
+                    <Text style={styles.text}>El email buscado no existe o no hay posteos del mismo</Text>
+            }
                    
-        </View>
+        </View>  
     )
 }
 }
 const styles = StyleSheet.create({
-    nombrePagina:{
-      borderWidth:1,
-      fontSize: 18
-    },
     searchContainer: {
-        height: '100px',
-        marginTop: 30,
-        marginBottom: 30,
         flex: 1,
+        marginTop: 5,
+        marginBottom: 5,
+        padding: 5,
        alignItems: 'center',
-        width: "200px%",
-        paddingHorizontal:10,
+        width: "100%",
+        maxHeight: '50%',
         marginTop: 20,
       },
-    email:{
-      borderWidth:1,
-      paddingVertical:10,
-      fontSize: 18
-    },
-    userN:{
-      borderWidth:1,
-      paddingVertical:10,
-      textTransform: 'capitalize',
-      fontSize: 18
-    },
-    day:{
-      borderWidth:1,
-      paddingVertical:10,
-      fontSize: 18
-    },
     btn:{
-        borderWidth:1,
+        borderWidth:2,
         borderRadius:5,
         backgroundColor:'black',
         paddingVertical:6,
         paddingHorizontal:8,
         marginHorizontal:'auto',
-        paddingHorizontal: 10,
-        paddingVertical: 6,
         textAlign: 'center',
         width: '50%'
     },
@@ -116,18 +93,25 @@ const styles = StyleSheet.create({
       fontSize: 20
     },
     container:{
-      flex:1
+      flex:2
     },
     textI:{
-        height:20,
+        height:10,
         paddingVertical:15,
         paddingHorizontal: 10,
-        borderWidth:1,
-        borderColor: '#ccc',
-        borderStyle: 'solid',
+        borderWidth:2,
+        borderColor: 'black',
         borderRadius: 6,
         marginVertical:10,
         width: '50%'
+      },
+      text:{
+        borderWidth:2,
+        borderColor: 'black',
+        paddingVertical:5,
+        width: 'fit-content',
+        fontSize: 18,
+        margin:'auto'
       }
 })
 export default Search
