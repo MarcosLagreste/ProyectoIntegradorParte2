@@ -35,7 +35,7 @@ class Home extends Component {
   render(){
     return (
       <View style={styles.container}>
-       <Text style={styles.text}>Latest posts:</Text>
+       <Text>Estos son los posts recientes:</Text>
        {this.state.loading ? 
        <ActivityIndicator
        size={30}
@@ -57,10 +57,6 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container:{
     flex:1
-  },
-  text:{
-    fontSize: 16,
-    fontWeight: 'bold'
   }
 })
 

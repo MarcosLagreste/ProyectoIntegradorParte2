@@ -25,7 +25,7 @@ class MyCamera extends Component {
 
   sacarFoto(){
       this.metodosDeCamara.takePictureAsync()
-      .then(foto => this.setState({ //si haces el console log de response me va a dar un objeto que es lo que voy a llamar "foto" que tiene adentro a uri y mas cosas.
+      .then(foto => this.setState({ //el console log de response me va a dar un objeto que es lo que voy a llamar "foto" que tiene adentro a uri y mas cosas.
         urlFoto: foto.uri,
         mostrarCamara: false
       }))
@@ -39,7 +39,7 @@ class MyCamera extends Component {
         const ref = storage.ref(`fotos/${Date.now()}.jpg`)
         ref.put(imagen)  //Hasta aca subi la foto a firestore a la carpeta fotos. Ahora ya empiezo a traerla.
         .then(reponse => {
-          ref.getDownloadURL()
+          ref.getDownloadURL() //Descarga la ruta en donde guardo la imagen
           .then(urlLista => {
             this.props.subiendoImagen(urlLista)
           })
