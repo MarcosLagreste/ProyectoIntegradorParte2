@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 import React, {Component} from 'react'
 
-class Login extends Component {
+class Login extends Component { 
   constructor(props){
     super(props)
     this.state={
@@ -13,29 +13,29 @@ class Login extends Component {
 
 
   render(){
-    const {signIn} = this.props
+    const {signIn} = this.props //declarando el metodo singIn que traje por props desde el padre stackNav como una constante
     return (
       <View>
         <TextInput
-          style={styles.input}
-          onChangeText={text => this.setState({email: text})}
+          style={styles.input} //formulario de email
+          onChangeText={text => this.setState({email: text})} //guardando el texto escrito en el estado
           keyboardType='email-address'
           placeholder='email'
         />
         <TextInput
-          style={styles.input}
-          onChangeText={text => this.setState({password: text})}
+          style={styles.input} //formulario de password
+          onChangeText={text => this.setState({password: text})}//guardando el texto escrito en el estado
           keyboardType='default'
           placeholder='password'
-          secureTextEntry={true}
+          secureTextEntry={true} //propiedad que encrypta la contraseña
         />
         <TouchableOpacity style={styles.button} onPress={() => signIn(this.state.email, this.state.password)}>
           <Text style={styles.btnT}>
             Loguearme
           </Text>
         </TouchableOpacity>
-        <View style={this.props.loginError ? styles.showError : styles.hideError}>          
-        <Text style={styles.errorText}>{this.props.loginError}</Text>
+        <View style={this.props.loginError ? styles.showError : styles.hideError}> {/*mostrando u ocultando el mensaje error de registro*/}
+        <Text style={styles.errorText}>{this.props.loginError}</Text> {/*texto del error*/}
         </View>
         <Text style={styles.btnR}>
           You don't have an account?

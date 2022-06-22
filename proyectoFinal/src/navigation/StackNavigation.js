@@ -33,39 +33,37 @@ class StackNavigation extends Component{
     }
 
     logout(){
-        auth.signOut()
-        .then(response => this.setState({loggedIn: false}))
+        auth.signOut()//ejecutando metodo de auth singOut
+        .then(response => this.setState({loggedIn: false})) //luego modifico el estado de loggedIn a false para que renderize login y register
         .catch(error => console.log(error))
     }
 
     
-    signUp(email, password, userName){
-        auth.createUserWithEmailAndPassword(email, password)
+    signUp(email, password, userName){  //implemento los parametros que luego utilizare en el imput
+        auth.createUserWithEmailAndPassword(email, password) //metodo de auth(firebase)
         .then(response => {
-            db.collection("users").add({
+            db.collection("users").add({ //agrega a la coleccion users las propiedades con sus respectivos parametros
             email: email,
             userName: userName, 
             createdAt: Date.now(),
         })})
-        .then(response => this.setState({logedIn: true})) 
-        .catch(error => this.setState({registerError: `Problems because of ${error.message}`}))
-        .catch(e => {
-            this.setState({registerError: error.message})
-        })
+        .then(response => this.setState({logedIn: true}))  //modifico el estado
+        .catch(error => this.setState({registerError: `Problems because of ${error.message}`})) // guardando mensaje de error en caso de no cumplir con lo minimo de auth para el metodo
+        //.catch(e => {
+            //this.setState({registerError: error.message}) 
+        //})
     }
 
 
-    signIn(email, password){
-        auth.signInWithEmailAndPassword(email, password)
+    signIn(email, password){ //metodo de login
+        auth.signInWithEmailAndPassword(email, password) //uso el auth de firebase para corroborar los datos e ingresar
         .then(response => {
-            //nescesitamos traer al user y actualizarle lastLogin
-            //db.collection('users').doc
             console.log(response.user.metadata);
             this.setState({
-                loggedIn:true
+                loggedIn:true //seteo estado del boleano a true
             })
         })
-        .catch(error =>this.setState({loginError: error.message}))
+        .catch(error =>this.setState({loginError: error.message})) //tomo el error y lo guardo en el estado de loginError
     }
 
     nuevoPost(description, photo){
@@ -97,7 +95,7 @@ class StackNavigation extends Component{
                                 options={{
                                     headerShown:false
                                 }}
-                                initialParams={
+                                initialParams={ //pasamos datos y/o funciones a la scren para que las considere al inico del renderizado
                                     {
                                         logout: () => this.logout(),
                                         nuevoPost: (description, photo) => this.nuevoPost(description, photo),
@@ -123,11 +121,11 @@ class StackNavigation extends Component{
                             <Stack.Screen 
                                 name='Register' 
     
-                                children={
-                                    (props)=> <Register 
+                                children={ //para renderizar el componente debemos pasar una funcion que retorne el componente junto con la info del estado que enviaremos
+                                    (props)=> <Register
                                     signUp={(email, password, userName)=> this.signUp(email, password, userName)}
                                     registerError={this.state.registerError}
-                                    {...props}
+                                    {...props} //operador spread que sirve para pasar las props tal cual se reciben
                                     />
                     
                                 }

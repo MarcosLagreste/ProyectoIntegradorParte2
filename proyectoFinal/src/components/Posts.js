@@ -148,7 +148,8 @@ const styles= StyleSheet.create({
         flex: 1
     },
     image: {
-        height: 200
+        height: 200,
+        minWidth: 400
     },
     btn:{
         borderWidth:2,

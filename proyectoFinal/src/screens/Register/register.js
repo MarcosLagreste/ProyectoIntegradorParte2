@@ -1,13 +1,12 @@
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import React, {Component} from 'react'
-import { auth } from '../../firebase/config';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native' //importando librerias de react-native
+import React, {Component} from 'react' //base de una screen con estado
+import { auth } from '../../firebase/config'; //importando autenticador de firebase
 
 class Register extends Component {
   constructor(props){
     super(props);
-    this.state={
-      email:'',
+    this.state={ //declarando los estados
+      email:'', // '' (en formato string)
       userName:'',
       password:'',
       logedIn:false,
@@ -18,7 +17,7 @@ class Register extends Component {
 
   
   componentDidMount(){
-    // console.log(this.props.route.params.errorMessage)
+    // console.log(this.props.route.params.registerError)
     auth.onAuthStateChanged((user)=>{
       // console.log(user)
     })
@@ -26,40 +25,40 @@ class Register extends Component {
   
 
   
-  render(){
-    const {signUp} = this.props
+  render(){ //renderizando la screen register
+    const {signUp} = this.props //declarando el metodo singUp que traje por props desde el padre stackNav como una constante
 
     return (
       <View>
-        <TextInput
+        <TextInput //formulario de email
           style={styles.input}
-          onChangeText={text => this.setState({email: text})}
-          keyboardType='email-address'
+          onChangeText={text => this.setState({email: text})} //guardando el texto escrito en el estado
+          keyboardType='email-address' //tipo de teclado
           placeholder='email'
         />
-        <TextInput
+        <TextInput //form de userName
           style={styles.input}
           onChangeText={text => this.setState({userName: text})}
           keyboardType='email-address'
           placeholder='userName'
         />
         <TextInput
-          style={styles.input}
+          style={styles.input} //form de password
           onChangeText={text => this.setState({password: text})}
           keyboardType='default'
           placeholder='password'
-          secureTextEntry={true}
+          secureTextEntry={true} //propiedad que encrypta la contraseña
         />
-        {this.state.email !== '' && this.state.userName !== '' && this.state.password !== '' ?
+        {this.state.email !== '' && this.state.userName !== '' && this.state.password !== '' ? //si los tres textImput estan vacios no renderizo el boton de register
         <TouchableOpacity style={styles.button} onPress={
           () => {
-            signUp(this.state.email, this.state.password, this.state.userName)
+            signUp(this.state.email, this.state.password, this.state.userName) //ejecutando el metodo singUp declarado en StackNav
           }}>
           <Text style={styles.btnT}>
             Register
           </Text>
         </TouchableOpacity>
-        :
+        : //parte del condicional ternario
         <View>
         <Text style={styles.emptyT}>Please complete the empty fields</Text>
         <Text>example de Email: example@example.com</Text>
@@ -67,13 +66,13 @@ class Register extends Component {
         <Text>example de password: example (more than 6 leters)</Text>
         </View>
         }
-        <View style={this.props.registerError ? styles.showError : styles.hideError}>          
+        <View style={this.props.registerError ? styles.showError : styles.hideError}> {/*mostrando u ocultando el mensaje error de registro*/}
         <Text style={styles.errorText}>{this.props.registerError}</Text>
         </View>
         <Text style={styles.btnR}>
         Do you have an account?
         </Text>
-        <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Login')}>
+        <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Login')}> {/*redirecciona al screen login */}
         <Text style={styles.btnT}>
           Go to login
         </Text>
@@ -83,7 +82,7 @@ class Register extends Component {
   }
 }
 
-const styles =  StyleSheet.create({
+const styles =  StyleSheet.create({ //constante de nombre styles que utiliza el metodo create() del objeto stylesheet
   input:{
     borderWidth:2,
     borderColor:'black',

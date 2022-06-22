@@ -12,9 +12,9 @@ class Search extends Component {
         encontrado: false,
       }
     }
-    buscar(){
-        db.collection('posts')
-            .where('owner','==',this.state.email).onSnapshot(docs => {
+    buscar(){ //metodo buscar
+        db.collection('posts')//traigo la coleccion posts
+            .where('owner','==',this.state.email).onSnapshot(docs => { //siempre y cuando el dueño sea igual al email buscado en el textImput
                 let posts = [];
                 docs.forEach(doc => {
                 posts.push({
@@ -41,25 +41,25 @@ render(){
                     keyboardType='default'
                     placeholder='email completo a buscar...'
                     value={this.state.email}
-                    onChangeText={(text) => this.setState({ email: text})}
+                    onChangeText={(text) => this.setState({ email: text})} //cuando cambia el texto escrito en el imput cambia el estado de email
                 />  
                 <TouchableOpacity
                     style={styles.btn} 
-                    onPress={()=>this.buscar()}
+                    onPress={()=>this.buscar()} //ejecuta el metodo buscar
                     >
                     <Text style={ styles.btnT}>Search</Text>
                 </TouchableOpacity>                         
            
-            {this.state.encontrado ?
+            {this.state.encontrado ? // si encuentra usuarios con ese email
                 <View style={styles.container}>
                     <Text>Search results:</Text>
-                    <FlatList 
+                    <FlatList  //renderizo los resultados de busqueda correspondientes al email buscado
                         data={this.state.posteos}
                         keyExtractor={item=>item.id.toString()}
                         renderItem={({item}) => <Posts info={item} navigation={this.props.navigation}/> }
                     />
                 </View>
-                :
+                : // caso contrario muestro el siguiente texto
                     <Text style={styles.text}>El usuario no existe o aún no tiene publicaciones</Text>
             }
                    
