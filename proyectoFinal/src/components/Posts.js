@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import { FontAwesome } from '@expo/vector-icons'
 import firebase from 'firebase'
 import {auth, db} from '../firebase/config'
-
+import { AntDesign } from '@expo/vector-icons'; 
 
 class Posts extends Component {
     
@@ -19,7 +19,7 @@ class Posts extends Component {
     }
 
     componentDidMount(){
-        console.log(this.props)
+        //console.log(this.props)
         const documento = this.props.info.data
         const meGusto = documento.likes.includes(auth.currentUser.email)
         if(documento.likes){
@@ -72,15 +72,32 @@ class Posts extends Component {
         })
         .catch(e=> console.log(e))
     }
+    borrar(){
+        const posts = this.props.info
+        db.collection('posts').doc(posts.id).delete()
+        .then(() => {
+                console.log("Post deleted");
+            }).catch((error) => {
+                console.error("Error deleting post", error);
+            });
+    }
 
     render(){
         
         const documento = this.props.info.data
-        const dia = documento.createdAt
+        //const dia = documento.createdAt
+        const postOwner = documento.owner
         return (
             <View style={styles.container}>
                 <View>
                     <Text style={styles.postOwner}>{documento.owner}</Text>
+                    {postOwner == auth.currentUser.email ?
+                    <TouchableOpacity style={styles.touchB} onPress={() => this.borrar()}>
+                        <AntDesign style={styles.btnD} name="delete" size={24} color="black" />
+                    </TouchableOpacity>
+                    :
+                    <></>
+                    }
                     <Image style={styles.image}
                     source={{uri: `${documento.photo}`}}
                     resizeMode='contain' 
@@ -99,10 +116,11 @@ class Posts extends Component {
                     </View>
                     <Text style={styles.postText}>{documento.description}</Text>
                     <Text>Comments: {this.state.cantComments}</Text>
-                    <Text>Fecha de creacion: {dia}</Text>
+                    {/* <Text>creation date: {dia}</Text> */}
                     <TouchableOpacity style={styles.btn} onPress={() => this.props.navigation.navigate('Comments', {id: this.props.info.id, pie: this.props.info.data.description})}>
-                    <Text style={styles.btnT}>Comentar esta publicacion</Text>
-                    </TouchableOpacity> 
+                    <Text style={styles.btnT}>Coment this post</Text>
+                    </TouchableOpacity>
+                    
                 </View>                
             </View>
             
@@ -140,6 +158,13 @@ const styles= StyleSheet.create({
       btnT:{
         color: 'white',
         fontSize: 15
+      },
+      btnD:{
+        fontSize: 30
+      },
+      touchB:{
+        flex:1,
+        width: 'fit-content'
       }
    
 })

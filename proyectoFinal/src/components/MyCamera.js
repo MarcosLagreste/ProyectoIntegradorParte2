@@ -69,12 +69,12 @@ class MyCamera extends Component {
                   style={styles.camera}
                   source={{uri: this.state.urlFoto}}
                 />
-                <View style={styles.buttons}>
-                  <TouchableOpacity onPress={() => this.aceptarFoto()}>
-                    <Text>Aceptar</Text>
+                <View style={styles.buttons2}>
+                  <TouchableOpacity style={styles.btn} onPress={() => this.aceptarFoto()}>
+                    <Text style={styles.btnT1}>Accept</Text>
                   </TouchableOpacity>
-                  <TouchableOpacity onPress={() => this.rechazarFoto()}>
-                    <Text>Rechazar</Text>
+                  <TouchableOpacity style={styles.btn} onPress={() => this.rechazarFoto()}>
+                    <Text style={styles.btnT1}>Decline</Text>
                   </TouchableOpacity>
                 </View>
               </>
@@ -86,14 +86,14 @@ class MyCamera extends Component {
                   ref={metodosDeCamara => this.metodosDeCamara = metodosDeCamara}
                 />
                 <View style={styles.buttons}>
-                    <TouchableOpacity onPress={() => this.sacarFoto()}>
-                        <Text>Tomar Foto</Text>
+                    <TouchableOpacity style={styles.btn} onPress={() => this.sacarFoto()}>
+                        <Text style={styles.btnT}>Take Picture</Text>
                     </TouchableOpacity>
                 </View>
               </>
         
           : 
-          <Text>Lo siento, no tienes permiso para usar la camara</Text>
+          <Text style={styles.text}>Sorry, you don't have permission to access the camera</Text>
           }
           
       </View>
@@ -110,6 +110,42 @@ const styles = StyleSheet.create({
     },
     buttons: {
         flex: 1
-    }
+    },
+    btn:{
+      borderWidth:1,
+      borderRadius:5,
+      backgroundColor:'black',
+      paddingVertical:6,
+      paddingHorizontal:8,
+      marginHorizontal:'auto',
+      textAlign: 'center',
+      width: 'fit-content'
+    },
+    btnT:{
+      color: 'white',
+      fontSize: 20
+    },
+    btn2:{
+      borderWidth:1,
+      borderRadius:5,
+      backgroundColor:'black',
+      marginHorizontal:'auto',
+      paddingHorizontal: 10,
+      paddingVertical: 6,
+      textAlign: 'center',
+      width: 'fit-content'
+    },
+    btnT1:{
+      color: 'azure',
+      fontSize: 20,
+    },
+    buttons2: {
+      flex: 2
+  },
+  text:{
+    padding: 10,
+    fontSize: 16,
+    color: 'crimson',
+  }
 })
 export default MyCamera

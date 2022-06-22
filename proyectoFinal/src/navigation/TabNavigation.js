@@ -4,6 +4,9 @@ import Home from '../screens/Home/Home'
 import Profile from '../screens/Profile/Profile'
 import AgregarPosts from '../screens/AgregarPosts/AgregarPosts'
 import Search from '../screens/Search/Search'
+import { Octicons } from '@expo/vector-icons'; 
+import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
 const Tab = createBottomTabNavigator()
 
@@ -14,15 +17,21 @@ const Tab = createBottomTabNavigator()
     <Tab.Navigator>
         <Tab.Screen 
           name='Home' 
-          component={Home} 
+          component={Home}
+          options={{tabBarIcon:() => <FontAwesome5 name="home" size={24} color="black" />}}
         />
         <Tab.Screen
-          name='AgregarPosts'
+          name='Add a new post'
           component={AgregarPosts}
           initialParams={{
             nuevoPost: (description, photo) => props.route.params.nuevoPost(description, photo)
           }}
-          options={{unmountOnBlur: true}}
+          options={{unmountOnBlur: true, tabBarIcon:() => <Octicons name="diff-added" size={24} color="black" />}}
+        />
+        <Tab.Screen 
+          name='Search' 
+          component={Search}
+          options={{tabBarIcon:() => <FontAwesome name="search" size={24} color="black" />}}
         />
         <Tab.Screen 
           name='My Profile' 
@@ -30,11 +39,9 @@ const Tab = createBottomTabNavigator()
           initialParams={{
               logout: () => logout()
           }}
+          options={{tabBarIcon:() => <FontAwesome name="user-circle-o" size={24} color="black" />}}
         />
-        <Tab.Screen 
-          name='Search' 
-          component={Search}
-        />
+        
     </Tab.Navigator>
   )
 }

@@ -60,7 +60,7 @@ render(){
                     />
                 </View>
                 :
-                    <Text style={styles.text}>El email buscado no existe o no hay posteos del mismo</Text>
+                    <Text style={styles.text}>El usuario no existe o aún no tiene publicaciones</Text>
             }
                    
         </View>  
@@ -74,8 +74,6 @@ const styles = StyleSheet.create({
         marginBottom: 5,
         padding: 5,
        alignItems: 'center',
-        width: "100%",
-        maxHeight: '50%',
         marginTop: 20,
       },
     btn:{
@@ -93,7 +91,7 @@ const styles = StyleSheet.create({
       fontSize: 20
     },
     container:{
-      flex:2
+      flex:5
     },
     textI:{
         height:10,

@@ -51,31 +51,31 @@ class Register extends Component {
           secureTextEntry={true}
         />
         {this.state.email !== '' && this.state.userName !== '' && this.state.password !== '' ?
-        <TouchableOpacity style={styles.boton} onPress={
+        <TouchableOpacity style={styles.button} onPress={
           () => {
             signUp(this.state.email, this.state.password, this.state.userName)
           }}>
-          <Text>
+          <Text style={styles.btnT}>
             Register
           </Text>
         </TouchableOpacity>
         :
         <View>
-        <Text>Por favor completar los campos</Text>
-        <Text>ejemplo de Email: ejemplo@ejemplo.com</Text>
-        <Text>ejemplo de userName: ejemploUserName</Text>
-        <Text>ejemplo de password: ejemplo (more than 6 leters)</Text>
+        <Text style={styles.emptyT}>Please complete the empty fields</Text>
+        <Text>example de Email: example@example.com</Text>
+        <Text>example de userName: exampleUserName</Text>
+        <Text>example de password: example (more than 6 leters)</Text>
         </View>
         }
         <View style={this.props.registerError ? styles.showError : styles.hideError}>          
         <Text style={styles.errorText}>{this.props.registerError}</Text>
         </View>
-        <Text>
-          Ya tienes una cuenta?
+        <Text style={styles.btnR}>
+        Do you have an account?
         </Text>
-        <TouchableOpacity style={styles.boton} onPress={()=>this.props.navigation.navigate('Login')}>
-        <Text>
-          Ir al login
+        <TouchableOpacity style={styles.button} onPress={()=>this.props.navigation.navigate('Login')}>
+        <Text style={styles.btnT}>
+          Go to login
         </Text>
         </TouchableOpacity>
       </View>
@@ -87,18 +87,29 @@ const styles =  StyleSheet.create({
   input:{
     borderWidth:2,
     borderColor:'black',
-    marginTop:16
+    marginVertical:8,
+    padding: 3,
   },
-  boton:{
+  button:{
     flex:1,
-    marginVertical:16,
-    padding:16,
-    borderWidth:2,
-    borderColor:'blue',
+    marginVertical:10,
+    paddingVertical:16,
+    paddingHorizontal:8,
+    borderColor:'grey',
     borderWidth:1,
     borderRadius:5,
-    backgroundColor:'lightgreen',
-
+    backgroundColor:'black',
+    alignItems: 'center',
+    marginHorizontal:'auto'
+    
+  },
+  btnR:{
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  btnT:{
+    color: 'white',
+    fontSize: 20,
   },
   hideError:{
     display: 'flex',
@@ -113,6 +124,10 @@ const styles =  StyleSheet.create({
     borderRadius: 5,
     padding: 7,
   },
+  emptyT:{
+    fontSize: 16,
+    fontWeight: 'bold'
+  }
 })
 
 export default Register

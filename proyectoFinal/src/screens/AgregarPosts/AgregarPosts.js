@@ -27,7 +27,7 @@ class AgregarPosts extends Component {
     console.log(this.props)
     return(
       <View style={styles.container}>
-        <Text>Subir un nuevo Post</Text>
+        <Text style={styles.text}>Add a new Post</Text>
         {this.state.mostrarComponenteCamara ?
           <MyCamera subiendoImagen = {(url) => this.subiendoImagen(url)}  />
         :
@@ -81,6 +81,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 30,
   },
+  text:{
+    fontSize: 16,
+    fontWeight: 'bold'
+  }
 })
 
 
